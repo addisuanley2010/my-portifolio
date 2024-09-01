@@ -1,6 +1,5 @@
 
 import { Request, Response } from "express";
-import UserService from "../services/user.service";
 
 
 interface AuthenticatedRequest extends Request {

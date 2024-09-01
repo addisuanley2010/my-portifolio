@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import UserService from "../services/user.service";
 import { encryptPassword, comparePassword } from "../utils/passwordUtils.utils";
 import { generateToken } from "../utils/generate.token.util";
+import { respond } from "../utils/error.respond.utils";
 
 class UserController {
   private service: UserService
@@ -16,9 +17,11 @@ class UserController {
       const password = data.password;
       data.password = await encryptPassword(password);
       const newUser = await this.service.signUp(data);
-      res.status(201).json({ success: true, message: "User created successfully!", newUser });
+      respond(res, 201, true, 'User created successfully!', newUser);
+
     } catch (error: any) {
-      res.status(500).json({ success: false, message: error.message });
+      respond(res, 500, false, error.message);
+
     }
   }
 
@@ -32,15 +35,22 @@ class UserController {
         const isPasswordValid = await comparePassword(password, user.password);
         if (isPasswordValid) {
           const token = generateToken(user);
-          res.status(200).json({ success: true, message: "User signed in successfully!",user, token });
+          const { password, ...userWithoutPassword } = user.toObject();
+          const loggedUser = {
+            ...userWithoutPassword,
+            token
+          };
+          respond(res, 200, true, 'User signed in successfully!', loggedUser);
         } else {
-          res.status(401).json({ success: false, message: "Invalid password!" });
+          respond(res, 401, false, 'Invalid password');
+
         }
       } else {
-        res.status(401).json({ success: false, message: "Invalid email!" });
+        respond(res, 401, false, 'Invalid Email');
       }
     } catch (error: any) {
-      res.status(500).json({ success: false, message: error.message });
+      respond(res, 500, false, error.message);
+
     }
   }
 

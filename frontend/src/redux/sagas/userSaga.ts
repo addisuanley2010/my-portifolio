@@ -10,13 +10,13 @@ export function* handleAddUser(action: any) {
         yield put(loading(true))
         try {
                 const response: CallableFunction = yield call(axios.post, `${api}/sign-up`, action);//{ title, album, gener, artist }
-                const { data, message } = yield response.data
+                const { data, message } = yield (response as any).data 
                 yield put(addUserToStore(data));
                 yield put(addMessageToStore(message));
 
         } catch (error) {
                 // yield put(message(error.response.data.message));
-                yield put(addMessageToStore(error.message));
+                yield put(addMessageToStore((error as any).message));
 
         }
 
@@ -26,14 +26,14 @@ export function* handleLogin(action: any) {
         yield put(loading(true))
         try {
                 const response: CallableFunction = yield call(axios.post, `${api}/sign-in`, action.formData);//{ title, album, gener, artist }
-                const { data, message } = yield response.data
+                const { data, message } = yield ( response as any).data
 
                 yield put(addMessageToStore(message));
                 yield put(addTokenToStore(data));
 
         } catch (error) {
                 // yield put(message(error.response.data.message));
-                yield put(addMessageToStore(error.message));
+                yield put(addMessageToStore(( error as any).message));
 
         }
 

@@ -13,7 +13,7 @@ class UserController {
 
   signUp = async (req: Request, res: Response): Promise<void> => {
     try {
-      const data = req.body;
+      const data = req.body.formData;
       const password = data.password;
       data.password = await encryptPassword(password);
       const newUser = await this.service.signUp(data);

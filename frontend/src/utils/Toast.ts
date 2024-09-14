@@ -3,7 +3,7 @@ import { ToastType } from "../types/user.types";
 
 
 
-const Toast = (message:string, status:ToastType) => {
+const MyToast = (message:string, status:ToastType) => {
   if (status === ToastType.SUCCESS) {
     toast.success(message, {
       position: "top-center",
@@ -29,4 +29,4 @@ const Toast = (message:string, status:ToastType) => {
   }
 };
 
-export default Toast;
+export default MyToast;

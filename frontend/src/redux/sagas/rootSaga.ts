@@ -1,8 +1,10 @@
 import { all } from "redux-saga/effects";
-import { watcMusicSaga } from "./userSaga";
+import { watcUserSaga } from "./userSaga";
+import { watcSkillSaga } from "./skillSaga";
 
 export function* rootSaga() {
     yield all([
-        watcMusicSaga()
+        watcUserSaga(),
+        watcSkillSaga()
     ])
 }

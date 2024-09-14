@@ -62,4 +62,4 @@ const inputSlice = createSlice({
         }
 })
 export const { addUserToStore, loading, addMessageToStore, addTokenToStore } = inputSlice.actions
-export const inputReducer = inputSlice.reducer;
+export const userReducer = inputSlice.reducer;

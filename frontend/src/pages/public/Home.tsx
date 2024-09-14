@@ -61,7 +61,7 @@ const Home = () => {
       </div>
       <div className="p-4">
         <img
-          src="/profile.JPG"
+          src="/profile.png"
           alt="My Photo"
           className="rounded-full w-80 h-180"
         />

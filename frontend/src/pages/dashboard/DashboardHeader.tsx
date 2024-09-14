@@ -1,16 +1,21 @@
-import { useContext } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import { UserContext } from "../../hooks/UserContext";
+import { InitialStateInterface } from "../../types/user.types";
+import { RootState } from "../../store";
+import { useSelector } from "react-redux";
 
 const DashboardHeader: React.FC = () => {
   const navigate = useNavigate();
-  const { setCurrentUser } = useContext(UserContext);
   const location = useLocation();
 
   const logout = () => {
-    setCurrentUser(null);
+
+    localStorage.removeItem("userToken"); 
     navigate("/");
+    
   };
+  const user: InitialStateInterface = useSelector(
+    (state: RootState) => state.user
+  );
 
   return (
     <div className="bg-gray-800 text-white p-4">
@@ -64,6 +69,8 @@ const DashboardHeader: React.FC = () => {
           >
             Logout
           </button>
+          <br />
+          {user.userData.full_name}
         </div>
       </div>
     </div>

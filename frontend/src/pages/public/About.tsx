@@ -6,7 +6,7 @@ const About = () => {
     >
       <div className="p-4 text-center">
         <img
-          src="/profile.JPG"
+          src="/profile.png"
           alt="My Photo"
           className="rounded-full w-80 h-180 mx-auto"
         />

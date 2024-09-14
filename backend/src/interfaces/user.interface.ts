@@ -1,7 +1,7 @@
 
 export interface IUser {
         _id?: string;
-        full_name: string;  
+        full_name: string;
         user_name: string;
         gender: string;
         phone: string;
@@ -10,5 +10,11 @@ export interface IUser {
         qualification: string;
         password: string;
         verified: boolean;
-        role:string;
+        role: string;
+}
+export interface ISkill {
+
+        _id?: string;
+        skill_name: string
+        skill_percent?: number
 }

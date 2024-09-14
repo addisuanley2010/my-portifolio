@@ -1,9 +1,7 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Toast from "../../utils/Toast";
-import { InitialStateInterface, ToastType } from "../../types/user.types";
+import { InitialStateInterface } from "../../types/user.types";
 import { RootState } from "../../store";
-import { UserContext } from "../../hooks/UserContext";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -12,7 +10,6 @@ const Login = () => {
     password: "",
   });
 
-  const { setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const user: InitialStateInterface = useSelector(
@@ -20,11 +17,9 @@ const Login = () => {
   );
 
   const dispatch = useDispatch();
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit =  (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await dispatch({ type: "LOGIN", formData });
-    Toast("You have no account", ToastType.ERROR);
-    setCurrentUser(user.token!);
+     dispatch({ type: "LOGIN", formData });
   };
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

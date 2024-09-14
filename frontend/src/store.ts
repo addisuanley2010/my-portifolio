@@ -1,18 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {inputReducer} from './redux/features/userSlice'
+import { userReducer } from './redux/features/userSlice'
+import { skillReducer } from './redux/features/skillSlice'
+
 import createSagaMiddleware from 'redux-saga';
 import { rootSaga } from "./redux/sagas/rootSaga";
 
-const sagaMiddleware=createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware()
 
 
 
 
-export const store =configureStore({
-        reducer:{
-                user:inputReducer
+export const store = configureStore({
+        reducer: {
+                user: userReducer,
+                skill: skillReducer
         },
-        middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(sagaMiddleware)
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })
 
 

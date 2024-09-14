@@ -3,44 +3,47 @@ import { api } from '../../utils/api';
 import axios from 'axios';
 
 import { addTokenToStore, addUserToStore, loading, addMessageToStore } from '../features/userSlice';
+import MyToast from '../../utils/Toast';
+import { ToastType } from '../../types/user.types';
 
 
-// ...................ADD MUSIC...............................
+// ...................ADD USER...............................
 export function* handleAddUser(action: any) {
         yield put(loading(true))
         try {
-                const response: CallableFunction = yield call(axios.post, `${api}/sign-up`, action);//{ title, album, gener, artist }
-                const { data, message } = yield (response as any).data 
+                const response: CallableFunction = yield call(axios.post, `${api}/sign-up`, action);
+                const { data, message } = yield (response as any).data
                 yield put(addUserToStore(data));
                 yield put(addMessageToStore(message));
 
         } catch (error) {
-                // yield put(message(error.response.data.message));
                 yield put(addMessageToStore((error as any).message));
 
         }
 
 }
+// ...................USER LOGIN.............................
 
 export function* handleLogin(action: any) {
         yield put(loading(true))
-        try {
-                const response: CallableFunction = yield call(axios.post, `${api}/sign-in`, action.formData);//{ title, album, gener, artist }
-                const { data, message } = yield ( response as any).data
 
-                yield put(addMessageToStore(message));
+        try {
+                const response: CallableFunction = yield call(axios.post, `${api}/sign-in`, action.formData);
+                const { data, message } = yield (response as any).data
+                MyToast(message, ToastType.SUCCESS);
+
                 yield put(addTokenToStore(data));
 
         } catch (error) {
-                // yield put(message(error.response.data.message));
-                yield put(addMessageToStore(( error as any).message));
+                MyToast((error as any).response.data.message, ToastType.ERROR);
+                yield put(loading(false))
 
         }
 
 }
 
 // ....................................... END OF SAGA ...................................
-export function* watcMusicSaga() {
+export function* watcUserSaga() {
         yield takeEvery('CREATE_USER', handleAddUser);
         yield takeEvery('LOGIN', handleLogin);
 

@@ -16,14 +16,13 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   const storedUser = localStorage.getItem("userToken");
   const initialUser = storedUser ? JSON.parse(storedUser) : null;
 
+
   const [currentUser, setCurrentUser] = useState<string | null>(initialUser);
 
 
   useEffect(() => {
     if (currentUser) {
       localStorage.setItem("userToken", JSON.stringify(currentUser));
-    } else {
-      localStorage.removeItem("userToken"); // Remove token if user logs out
     }
   }, [currentUser]);
 

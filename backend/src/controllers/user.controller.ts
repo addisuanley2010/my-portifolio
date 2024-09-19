@@ -36,17 +36,16 @@ class UserController {
         if (isPasswordValid) {
           const token = generateToken(user);
           const { password, ...userWithoutPassword } = user.toObject();
-          const loggedUser = {
-            ...userWithoutPassword,
-            token
-          };
-          respond(res, 200, true, 'User signed in successfully!', loggedUser);
+          res.send({ success: true, message: "user logged in successfully", user: userWithoutPassword, token, isAuthenticated: true })
         } else {
-          respond(res, 401, false, 'Invalid password');
+          // respond(res, 401, false, 'Invalid password');
+          res.send({ success: false, message: "Invalid password", user: "", token: "", isAuthenticated: false })
 
         }
       } else {
-        respond(res, 401, false, 'Invalid Email');
+        // respond(res, 401, false, 'Invalid Email');
+        res.send({ success: false, message: "Invalid email", user: "", token: "", isAuthenticated: false })
+
       }
     } catch (error: any) {
       respond(res, 500, false, error.message);

@@ -39,8 +39,8 @@ export function* getSkills() {
 
         try {
                 const response: CallableFunction = yield call(axios.get, `${api}/get-skill`);
-                const { data, message } = yield (response as any).data
-                MyToast(message, ToastType.SUCCESS);
+                const { data } = yield (response as any).data
+                // MyToast(message, ToastType.SUCCESS);
 
                 yield put(getAllSkill(data));
 

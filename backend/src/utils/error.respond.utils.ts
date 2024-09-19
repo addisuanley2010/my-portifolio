@@ -8,7 +8,6 @@ export const respond = (
   data?: any
 ) => {
   return res.status(statusCode).json({
-    status: statusCode < 400 ? "success" : "error",
     success,
     message,
     data,

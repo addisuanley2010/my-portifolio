@@ -1,18 +1,12 @@
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { InitialStateInterface } from "../../types/user.types";
 import { RootState } from "../../store";
 import { useSelector } from "react-redux";
+import Logout from "../../utils/Logout";
 
 const DashboardHeader: React.FC = () => {
-  const navigate = useNavigate();
   const location = useLocation();
 
-  const logout = () => {
-
-    localStorage.removeItem("userToken"); 
-    navigate("/");
-    
-  };
   const user: InitialStateInterface = useSelector(
     (state: RootState) => state.user
   );
@@ -61,7 +55,7 @@ const DashboardHeader: React.FC = () => {
           >
             Messages
           </NavLink>
-           <NavLink
+          <NavLink
             to={"dashboard/service"}
             className={`hover:text-emerald-500 ${
               location.pathname === "/dashboard/service"
@@ -71,7 +65,7 @@ const DashboardHeader: React.FC = () => {
           >
             Service
           </NavLink>
-           <NavLink
+          <NavLink
             to={"dashboard/education"}
             className={`hover:text-emerald-500 ${
               location.pathname === "/dashboard/education"
@@ -81,17 +75,11 @@ const DashboardHeader: React.FC = () => {
           >
             Education
           </NavLink>
-          
         </div>
         <div>
-          <button
-            onClick={logout}
-            className="italic text-red-500   py-2 rounded-lg hover:text-red-300 "
-          >
-            Logout
-          </button>
+          <Logout />
           <br />
-          {user.userData.full_name}
+          {user.user.user_name}
         </div>
       </div>
     </div>

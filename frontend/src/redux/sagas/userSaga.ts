@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { api } from '../../utils/api';
 import axios from 'axios';
 
-import { addTokenToStore, addUserToStore, loading, addMessageToStore } from '../features/userSlice';
+import { addUserToStore, loading } from '../features/userSlice';
 import MyToast from '../../utils/Toast';
 import { ToastType } from '../../types/user.types';
 
@@ -12,13 +12,11 @@ export function* handleAddUser(action: any) {
         yield put(loading(true))
         try {
                 const response: CallableFunction = yield call(axios.post, `${api}/sign-up`, action);
-                const { data, message } = yield (response as any).data
+                const { data } = yield (response as any).data
                 yield put(addUserToStore(data));
-                yield put(addMessageToStore(message));
 
         } catch (error) {
-                yield put(addMessageToStore((error as any).message));
-
+                console.log(error)
         }
 
 }
@@ -29,10 +27,10 @@ export function* handleLogin(action: any) {
 
         try {
                 const response: CallableFunction = yield call(axios.post, `${api}/sign-in`, action.formData);
-                const { data, message } = yield (response as any).data
+                const { message, token, success } = yield (response as any).data
                 MyToast(message, ToastType.SUCCESS);
-
-                yield put(addTokenToStore(data));
+                if (success) { localStorage.setItem('token', token) }
+                yield put(addUserToStore((response as any).data));
 
         } catch (error) {
                 MyToast((error as any).response.data.message, ToastType.ERROR);
@@ -41,11 +39,29 @@ export function* handleLogin(action: any) {
         }
 
 }
+export function* checkUser() {
+  yield put(loading(true))
+  try {
+    const token = localStorage.getItem('token');
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    
+    const response: CallableFunction = yield call(axios.get, `${api}/check-auth`, {
+      headers: headers
+    });
+    yield put(addUserToStore((response as any).data));
+
+  } catch (error) {
+    yield put(loading(false))
+  }
+}
+
 
 // ....................................... END OF SAGA ...................................
 export function* watcUserSaga() {
         yield takeEvery('CREATE_USER', handleAddUser);
         yield takeEvery('LOGIN', handleLogin);
+        yield takeEvery('CHECK_USER', checkUser);
+
 
 
 

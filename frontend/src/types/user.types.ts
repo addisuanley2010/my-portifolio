@@ -15,11 +15,12 @@ export interface IUser {
   token?: string
 }
 export interface InitialStateInterface {
-  userData: IUser,
+  user: IUser,
   loading: boolean,
-  message: string,
-  status: boolean,
-  token?: string
+  success: boolean,
+  token?: string,
+  isAuthenticated: boolean,
+  message:string
 }
 export enum ToastType {
   SUCCESS = "success",

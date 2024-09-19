@@ -5,7 +5,6 @@ import {
   ProjectManagment,
   SkillManagment,
 } from "../pages/index";
-import DashboardHeader from "../pages/dashboard/DashboardHeader";
 import { Footer } from "../components";
 import Educations from "../pages/dashboard/EducationManagment";
 import Services from "../pages/dashboard/ServiceManagment";
@@ -15,10 +14,13 @@ interface ProtectedRouteProps {
   element: React.ReactNode;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ path, element }) => {
+const UserProtectedRoute: React.FC<ProtectedRouteProps> = ({
+  path,
+  element,
+}) => {
   return (
     <>
-      <DashboardHeader />
+    <h4>This is User Header</h4>
       <Routes>
         <Route path="/*" element={<Navigate to="/dashboard" />} />
         <Route index path={path} element={element} />
@@ -33,4 +35,4 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ path, element }) => {
   );
 };
 
-export default ProtectedRoute;
+export default UserProtectedRoute;

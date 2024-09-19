@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { InitialStateInterface, IUser } from "../../types/user.types";
+import { InitialStateInterface } from "../../types/user.types";
 
 
 
 
 const initialState: InitialStateInterface = {
-        userData: {
+        user: {
                 _id: '',
                 full_name: '',
                 user_name: '',
@@ -18,10 +18,11 @@ const initialState: InitialStateInterface = {
                 role: '',
                 verified: false,
         },
-        loading: false,
+        loading: true,
+        isAuthenticated: false,
+        success: false,
         message: '',
-        status: false,
-        token: ""
+        token: ''
 
 };
 
@@ -30,36 +31,33 @@ const inputSlice = createSlice({
         initialState,
         reducers: {
                 loading: (state, action: PayloadAction<boolean>) => {
+                        state.loading = action.payload
+                        state.isAuthenticated = false
+                        state.user = initialState.user
+                        state.success = false
                         state.message = ''
                         state.token = ''
-                        state.userData = initialState.userData
-                        state.status = false
-                        state.loading = action.payload
-                        return state
-                },
-                addMessageToStore: (state, action: PayloadAction<string>) => {
-                        state.loading = false
-                        state.message = action.payload
-                        return state
-                },
-                addUserToStore: (state, action: PayloadAction<IUser>) => {
 
-                        state.userData = action.payload
-                        state.loading = false
-                        state.status = true
                         return state
                 },
-                addTokenToStore: (state, action: PayloadAction<IUser>) => {
 
+                addUserToStore: (state, action: PayloadAction<InitialStateInterface>) => {
+
+
+
+                        state.user = action.payload.user
+                        state.loading = false
+                        state.success = action.payload.success
+                        state.isAuthenticated = action.payload.isAuthenticated
+                        state.message = action.payload.message
                         state.token = action.payload.token
-                        state.loading = false
-                        state.status = true
                         return state
                 },
+
 
 
 
         }
 })
-export const { addUserToStore, loading, addMessageToStore, addTokenToStore } = inputSlice.actions
+export const { addUserToStore, loading } = inputSlice.actions
 export const userReducer = inputSlice.reducer;

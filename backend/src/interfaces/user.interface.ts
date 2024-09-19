@@ -18,3 +18,9 @@ export interface ISkill {
         skill_name: string
         skill_percent?: number
 }
+export interface IProject {
+  id?: string;
+  title: string;
+  description: string;
+  tags: string[];
+}

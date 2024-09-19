@@ -29,21 +29,29 @@ const inputSlice = createSlice({
                         state.status = true
                         state.skillData.push(action.payload)
                 },
-                  addSkillToStoreAll: (state, action: PayloadAction<any>) => {
+                getAllSkill: (state, action: PayloadAction<any>) => {
                         state.loading = false
                         state.status = true
-                        state.skillData=action.payload
+                        state.skillData = action.payload
                 },
                 deleteSkillFromStore: (state, action: PayloadAction<any>) => {
                         state.loading = false
                         state.status = true
                         state.skillData = state.skillData.filter((data: ISkill) => data._id !== action.payload.id)
                 },
+                updateSkillToStore: (state, action: PayloadAction<any>) => {
+                        state.loading = false;
+                        state.status = true;
+                        state.skillData = state.skillData.map((skill: ISkill) =>
+                                skill._id === action.payload._id ? action.payload : skill
+                        );
+                },
+
 
 
 
 
         }
 })
-export const { addSkillToStore, loading, deleteSkillFromStore,addSkillToStoreAll } = inputSlice.actions
+export const { addSkillToStore, loading, deleteSkillFromStore,getAllSkill , updateSkillToStore } = inputSlice.actions
 export const skillReducer = inputSlice.reducer;

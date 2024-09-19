@@ -18,6 +18,9 @@ function AppRoute() {
 
   useEffect(() => {
     dispatch({ type: "GET_SKILL" });
+        dispatch({ type: "GET_PROJECT" });
+
+
   }, [dispatch]);
 
 

@@ -3,6 +3,7 @@ import connectDatabase from './config/database.config';
 import dotenv from 'dotenv';
 import userRoute from './routes/user.route'
 import skillRoute from './routes/skill.route'
+import projectRoute from './routes/project.route'
 
 import cors from 'cors'
 
@@ -18,6 +19,8 @@ app.use(express.json());
 
 app.use("/", userRoute);
 app.use("/", skillRoute);
+app.use("/", projectRoute);
+
 
 
 const startServer = async () => {

@@ -61,6 +61,27 @@ const DashboardHeader: React.FC = () => {
           >
             Messages
           </NavLink>
+           <NavLink
+            to={"dashboard/service"}
+            className={`hover:text-emerald-500 ${
+              location.pathname === "/dashboard/service"
+                ? "text-emerald-500 font-bold underline"
+                : ""
+            }`}
+          >
+            Service
+          </NavLink>
+           <NavLink
+            to={"dashboard/education"}
+            className={`hover:text-emerald-500 ${
+              location.pathname === "/dashboard/education"
+                ? "text-emerald-500 font-bold underline"
+                : ""
+            }`}
+          >
+            Education
+          </NavLink>
+          
         </div>
         <div>
           <button

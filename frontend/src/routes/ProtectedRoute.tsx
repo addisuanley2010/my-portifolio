@@ -7,6 +7,8 @@ import {
 } from "../pages/index";
 import DashboardHeader from "../pages/dashboard/DashboardHeader";
 import { Footer } from "../components";
+import Educations from "../pages/dashboard/EducationManagment";
+import Services from "../pages/dashboard/ServiceManagment";
 
 interface ProtectedRouteProps {
   path: string;
@@ -23,6 +25,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ path, element }) => {
         <Route path={`${path}/skills`} element={<SkillManagment />} />
         <Route path={`${path}/projects`} element={<ProjectManagment />} />
         <Route path={`${path}/messages`} element={<MessageManagment />} />
+        <Route path={`${path}/education`} element={<Educations />} />
+        <Route path={`${path}/service`} element={<Services />} />
       </Routes>
       <Footer />
     </>

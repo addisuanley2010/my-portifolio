@@ -26,6 +26,19 @@ private service
 
     } 
   }
+
+  updateSkill = async (req: Request, res: Response): Promise<void> => {
+    const {id}=req.params
+    try {
+      const data = req.body
+      const updatedSkill = await this.service.updateSkill(id,data);
+      respond(res, 201, true, 'Skill updated successfully!', updatedSkill);
+
+    } catch (error: any) {
+      respond(res, 500, false, error.message);
+
+    } 
+  }
   getAllSkill = async (req: Request, res: Response): Promise<void> => {
     try {
       const skills = await this.service.getAllSkill();

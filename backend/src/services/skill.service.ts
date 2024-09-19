@@ -15,6 +15,10 @@ class SkillService {
     return await newSkill.save();
   }
 
+async updateSkill(id: string, SkillModelData: Partial<ISkill>) {
+  return await skillModel.findByIdAndUpdate(id, SkillModelData, { new: true });
+}
+
 
 }
 export default SkillService

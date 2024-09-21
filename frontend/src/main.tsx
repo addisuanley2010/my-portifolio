@@ -6,13 +6,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import { store } from "./store.ts";
 import AppRoute from "./routes/AppRoute.tsx";
-import UserProvider from "./hooks/UserContext.tsx";
+import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
-    <UserProvider>
-      <ToastContainer />
+    <ToastContainer />
+    <BrowserRouter>
       <AppRoute />
-    </UserProvider>
+    </BrowserRouter>
   </Provider>
 );

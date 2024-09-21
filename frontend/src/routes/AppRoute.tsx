@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {  Navigate, Route, Routes } from "react-router-dom";
 import { Dashboard, Login, Registration } from "../pages";
 import { useEffect } from "react";
 import { Loading, PageNotFound } from "../components";
@@ -26,7 +26,6 @@ function AppRoute() {
   }
 
   return (
-    <BrowserRouter>
       <Routes>
         {!isAuthenticated ? (
           <>
@@ -57,7 +56,6 @@ function AppRoute() {
         )}
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
-    </BrowserRouter>
   );
 }
 

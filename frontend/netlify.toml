@@ -1,5 +1,5 @@
 
 [[redirects]]
-  from = "../*"
-  to = "cd /index.html"
+  from = "/*"
+  to = "/index.html"
   status = 200

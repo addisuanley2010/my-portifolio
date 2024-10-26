@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 import userRoute from './routes/user.route'
 import skillRoute from './routes/skill.route'
 import projectRoute from './routes/project.route'
+import serviceRoute from './routes/service.route'
+
+import contactRoute from './routes/contact.route'
 
 import cors from 'cors'
 
@@ -20,6 +23,10 @@ app.use(express.json());
 app.use("/", userRoute);
 app.use("/", skillRoute);
 app.use("/", projectRoute);
+app.use("/", serviceRoute);
+app.use("/", contactRoute);
+
+
 
 
 

@@ -20,7 +20,9 @@ class UserController {
       respond(res, 201, true, 'User created successfully!', newUser);
 
     } catch (error: any) {
-      respond(res, 500, false, error.message);
+      // respond(res, 500, false, error.message);
+      respond(res, 500, false, "User Not Created , Try Again!");
+
 
     }
   }
@@ -38,12 +40,10 @@ class UserController {
           const { password, ...userWithoutPassword } = user.toObject();
           res.send({ success: true, message: "user logged in successfully", user: userWithoutPassword, token, isAuthenticated: true })
         } else {
-          // respond(res, 401, false, 'Invalid password');
           res.send({ success: false, message: "Invalid password", user: "", token: "", isAuthenticated: false })
 
         }
       } else {
-        // respond(res, 401, false, 'Invalid Email');
         res.send({ success: false, message: "Invalid email", user: "", token: "", isAuthenticated: false })
 
       }

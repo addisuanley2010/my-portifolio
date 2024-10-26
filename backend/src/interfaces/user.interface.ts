@@ -19,8 +19,16 @@ export interface ISkill {
         skill_percent?: number
 }
 export interface IProject {
-  id?: string;
-  title: string;
-  description: string;
-  tags: string[];
+        id?: string;
+        title: string;
+        description: string;
+        tags: string[];
+}
+
+export interface IContact {
+        id?: string;
+        name: string;
+        email: string;
+        phone: number;
+        message: string
 }

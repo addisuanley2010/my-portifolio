@@ -4,7 +4,6 @@ import { NavLink, useLocation } from "react-router-dom";
 const Header: React.FC = () => {
     const location = useLocation();
 
-console.log(location,'this loc')
     return (
         <div className="text-white p-4 fixed w-full top-0 z-10 bg-transparent">
             <div className="container mx-auto flex justify-end">

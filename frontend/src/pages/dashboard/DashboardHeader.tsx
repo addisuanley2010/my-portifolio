@@ -79,7 +79,7 @@ const DashboardHeader: React.FC = () => {
         <div>
           <Logout />
           <br />
-          {user.user.user_name}
+          Username: {user.user.user_name}
         </div>
       </div>
     </div>

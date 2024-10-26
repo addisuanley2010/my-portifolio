@@ -34,3 +34,8 @@ export interface IProject {
   project_desc: string;
   tags: string[];
 }
+export interface IService {
+  _id: number;
+ service_name: string;
+ service_description: string;
+  }

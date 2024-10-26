@@ -1,65 +1,49 @@
-import React, { useState } from 'react';
-
-interface Service {
-  id: number;
-  title: string;
-  description: string;
-}
+import React, { useState } from "react";
+import {  IService } from "../../types/user.types";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const Services: React.FC = () => {
-  const [services, setServices] = useState<Service[]>([
-    {
-      id: 1,
-      title: "Mobile App Development",
-      description: "Designing and building mobile applications for iOS and Android platforms.",
-    },
-    {
-      id: 2,
-      title: "Frontend Development",
-      description: "Creating interactive and user-friendly interfaces using modern frontend technologies like React and Vue.",
-    },
-    {
-      id: 3,
-      title: "Backend Development",
-      description: "Building robust and scalable backend systems using technologies such as Node.js, Express, and MongoDB.",
-    },
-  ]);
 
-  const [newService, setNewService] = useState<Omit<Service, 'id'>>({
-    title: '',
-    description: '',
+  const services = useSelector((state: RootState) => state.service);
+  const [newService, setnewService] = useState<Omit<IService, "_id">>({
+    service_name: "",
+    service_description: "",
   });
 
   const [editingId, setEditingId] = useState<number | null>(null);
+  const dispatch = useDispatch();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setNewService(prev => ({ ...prev, [name]: value }));
+    setnewService((prev) => ({ ...prev, [name]: value }));
   };
 
+
   const addService = () => {
-    if (newService.title && newService.description) {
-      setServices(prev => [...prev, { ...newService, id: Date.now() }]);
-      setNewService({ title: '', description: '' });
+    if (newService.service_name && newService.service_description) { 
+       dispatch({ type: "ADD_SERVICE", payload: newService });
+
     }
   };
 
-  const startEditing = (service: Service) => {
-    setEditingId(service.id);
-    setNewService(service);
+  const startEditing = (service: IService) => {
+    setEditingId(service._id);
+    setnewService(service);
   };
 
   const updateService = () => {
     if (editingId !== null) {
-      setServices(prev => prev.map(s => s.id === editingId ? { ...newService, id: s.id } : s));
+      dispatch({type:'UPDATE_SERVICE',payload:newService})
       setEditingId(null);
-      setNewService({ title: '', description: '' });
+      setnewService({ service_name: "", service_description: "" });
     }
   };
 
   const deleteService = (id: number) => {
-    setServices(prev => prev.filter(s => s.id !== id));
-  };
+dispatch({type:'DELETE_SERVICE',payload:id})  };
 
   return (
     <div className="min-h-screen bg-slate-800 flex flex-col justify-center items-center" id="services">
@@ -69,17 +53,17 @@ const Services: React.FC = () => {
         <div className="mb-8 bg-gray-700 p-6 rounded-md">
           <input
             type="text"
-            name="title"
-            value={newService.title}
+            name="service_name"
+            value={newService.service_name}
             onChange={handleInputChange}
             placeholder="Service Title"
             className="w-full mb-2 p-2 bg-gray-600 text-white rounded"
           />
           <textarea
-            name="description"
-            value={newService.description}
+            name="service_description"
+            value={newService.service_description}
             onChange={handleInputChange}
-            placeholder="Service Description"
+            placeholder="Service service_description"
             className="w-full mb-2 p-2 bg-gray-600 text-white rounded"
           />
           <button
@@ -91,10 +75,10 @@ const Services: React.FC = () => {
         </div>
 
         <div className="grid gap-6">
-          {services.map((service) => (
-            <div key={service.id} className="bg-gray-700 p-6 rounded-md shadow-md">
-              <h2 className="text-xl font-bold text-indigo-400 mb-2">{service.title}</h2>
-              <p className="text-sm text-gray-300 mb-4">{service.description}</p>
+          { services.serviceData.map((service) => (
+            <div key={service._id} className="bg-gray-700 p-6 rounded-md shadow-md">
+              <h2 className="text-xl font-bold text-indigo-400 mb-2">{service.service_name}</h2>
+              <p className="text-sm text-gray-300 mb-4">{service.service_description}</p>
               <div className="flex justify-end">
                 <button
                   onClick={() => startEditing(service)}
@@ -103,7 +87,7 @@ const Services: React.FC = () => {
                   Edit
                 </button>
                 <button
-                  onClick={() => deleteService(service.id)}
+                  onClick={() => deleteService(service._id)}
                   className="bg-red-600 text-white px-3 py-1 rounded"
                 >
                   Delete

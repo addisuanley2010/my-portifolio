@@ -14,8 +14,11 @@ function AppRoute() {
 
   useEffect(() => {
     dispatch({ type: "GET_SKILL" });
-    dispatch({ type: "CHECK_USER" });
     dispatch({ type: "GET_PROJECT" });
+    dispatch({ type: "GET_SERVICE" });
+    dispatch({ type: "CHECK_USER" });
+     dispatch({ type: "GET_MESSAGE" });
+
   }, [dispatch]);
 
   const { isAuthenticated, user, loading }: InitialStateInterface = useSelector(

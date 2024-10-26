@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Toast from "../../utils/Toast";
 import { RootState } from "../../store";
-import { InitialStateInterface,ToastType } from "../../types/user.types";
+import { InitialStateInterface } from "../../types/user.types";
 
 const Registration = () => {
   const [formData, setFormData] = useState({
@@ -36,7 +35,6 @@ const navigate=useNavigate()
     e.preventDefault();
     dispatch({ type: "CREATE_USER", formData });
 
-    Toast("You have no Previlage to Register", ToastType.ERROR);
   };
 
   return (

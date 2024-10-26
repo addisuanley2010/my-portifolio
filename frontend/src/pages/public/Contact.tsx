@@ -1,4 +1,25 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import MyToast from "../../utils/Toast";
+import { ToastType } from "../../types/user.types";
+
 const Contact = () => {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [phone, setPhone] = useState();
+  const [message, setMessage] = useState();
+  const dispatch = useDispatch();
+
+  const sendMessage = () => {
+    const contactData = { name, email, phone, message };
+
+    if (name && email && phone && message) {
+          dispatch({ type: "ADD_MESSAGE", payload: contactData });
+    } else {
+      MyToast("please fill all data", ToastType.ERROR);
+    }
+  };
+
   return (
     <div
       className="min-h-screen bg-gray-900 px-4 py-20 text-white"
@@ -30,6 +51,8 @@ const Contact = () => {
               id="name"
               className="w-full bg-gray-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-indigo-400 mb-4"
               placeholder="Your Name"
+              value={name}
+              onChange={(e: any) => setName(e.target.value)}
             />
 
             <label htmlFor="email" className="block mb-2">
@@ -40,6 +63,8 @@ const Contact = () => {
               id="email"
               className="w-full bg-gray-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-indigo-400 mb-4"
               placeholder="Your Email"
+              value={email}
+              onChange={(e: any) => setEmail(e.target.value)}
             />
 
             <label htmlFor="phone" className="block mb-2">
@@ -50,6 +75,8 @@ const Contact = () => {
               id="phone"
               className="w-full bg-gray-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-indigo-400 mb-4"
               placeholder="Your Phone Number"
+              value={phone}
+              onChange={(e: any) => setPhone(e.target.value)}
             />
 
             <label htmlFor="message" className="block mb-2">
@@ -60,9 +87,14 @@ const Contact = () => {
               rows={4}
               className="w-full bg-gray-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-indigo-400 mb-4"
               placeholder="Your Message"
+              value={message}
+              onChange={(e: any) => setMessage(e.target.value)}
             ></textarea>
 
-            <button className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">
+            <button
+              className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700"
+              onClick={sendMessage}
+            >
               Send
             </button>
           </div>

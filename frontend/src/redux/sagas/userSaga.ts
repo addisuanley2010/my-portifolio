@@ -14,9 +14,14 @@ export function* handleAddUser(action: any) {
                 const response: CallableFunction = yield call(axios.post, `${api}/sign-up`, action);
                 const { data } = yield (response as any).data
                 yield put(addUserToStore(data));
+                MyToast("User Created Successfully!", ToastType.SUCCESS);
 
         } catch (error) {
-                console.log(error)
+                MyToast((error as any).response.data.message, ToastType.ERROR);
+
+                yield put(loading(false))
+
+
         }
 
 }
@@ -33,34 +38,39 @@ export function* handleLogin(action: any) {
                 yield put(addUserToStore((response as any).data));
 
         } catch (error) {
-                MyToast((error as any).response.data.message, ToastType.ERROR);
+                MyToast((error as any).response.data.message, ToastType.WARNING);
                 yield put(loading(false))
 
         }
 
 }
 export function* checkUser() {
-  yield put(loading(true))
-  try {
-    const token = localStorage.getItem('token');
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};
-    
-    const response: CallableFunction = yield call(axios.get, `${api}/check-auth`, {
-      headers: headers
-    });
-    yield put(addUserToStore((response as any).data));
+        yield put(loading(true))
+        try {
+                const token = localStorage.getItem('token');
+                const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-  } catch (error) {
-    yield put(loading(false))
-  }
+                const response: CallableFunction = yield call(axios.get, `${api}/check-auth`, {
+                        headers: headers
+                });
+                yield put(addUserToStore((response as any).data));
+
+        } catch (error) {
+                yield put(loading(false))
+        }
 }
 
+export function* logout() {
+        yield put(loading(false))
+}
 
 // ....................................... END OF SAGA ...................................
 export function* watcUserSaga() {
         yield takeEvery('CREATE_USER', handleAddUser);
         yield takeEvery('LOGIN', handleLogin);
         yield takeEvery('CHECK_USER', checkUser);
+        yield takeEvery('LOGOUT_USER', logout);
+
 
 
 

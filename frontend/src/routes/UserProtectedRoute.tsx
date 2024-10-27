@@ -25,7 +25,7 @@ const UserProtectedRoute: React.FC<ProtectedRouteProps> = ({
     <DashboardHeader/>
     {/* <Header/> */}
       <Routes>
-        <Route path="/*" element={<Navigate to="/dashboard" />} />
+        <Route path="/*" element={<Navigate to="/user" />} />
         <Route index path={path} element={element} />
         <Route path={`${path}/skills`} element={<SkillManagment />} />
         <Route path={`${path}/projects`} element={<ProjectManagment />} />

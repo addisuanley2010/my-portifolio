@@ -8,6 +8,7 @@ import { InitialStateInterface } from "../types/user.types";
 import { RootState } from "../store";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import UserProtectedRoute from "./UserProtectedRoute";
+import User from "../pages/user/User";
 
 function AppRoute() {
   const dispatch = useDispatch();
@@ -16,8 +17,8 @@ function AppRoute() {
     dispatch({ type: "GET_SKILL" });
     dispatch({ type: "GET_PROJECT" });
     dispatch({ type: "GET_SERVICE" });
-    dispatch({ type: "CHECK_USER" });
      dispatch({ type: "GET_MESSAGE" });
+    dispatch({ type: "CHECK_USER" });
 
   }, [dispatch]);
 
@@ -52,7 +53,7 @@ function AppRoute() {
             <Route
               path="/*"
               element={
-                <UserProtectedRoute path="dashboard" element={<Dashboard />} />
+                <UserProtectedRoute path="user" element={<User />} />
               }
             />
           </>

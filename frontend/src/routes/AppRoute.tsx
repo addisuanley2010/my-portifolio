@@ -9,6 +9,7 @@ import { RootState } from "../store";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import UserProtectedRoute from "./UserProtectedRoute";
 import User from "../pages/user/User";
+// import React from "react";
 
 function AppRoute() {
   const dispatch = useDispatch();

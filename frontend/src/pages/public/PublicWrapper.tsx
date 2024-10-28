@@ -1,5 +1,6 @@
 import Footer from "../../components/Footer";
 import Header from "./Header";
+// import React from "react";
 
 import {
   Skills,

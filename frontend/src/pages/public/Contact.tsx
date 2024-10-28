@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import MyToast from "../../utils/Toast";
 import { ToastType } from "../../types/user.types";
+// import React from "react";
 
 const Contact = () => {
   const [name, setName] = useState();

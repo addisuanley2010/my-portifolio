@@ -1,5 +1,14 @@
 {
   "files": [],
+  
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react",
+    "outDir": "./dist",
+    "strict": true,
+    "allowSyntheticDefaultImports": true
+  },
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }

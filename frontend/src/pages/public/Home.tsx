@@ -7,6 +7,7 @@ import {
   faFacebook,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+// import React from "react";
 
 const Home = () => {
   const socialLinks = [

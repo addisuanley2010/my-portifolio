@@ -11,11 +11,11 @@ import {
 
 const Home = () => {
   const socialLinks = [
-    { icon: faLinkedin, url: "https://www.linkedin.com/" },
-    { icon: faGithub, url: "https://github.com/" },
-    { icon: faTelegram, url: "https://telegram.org/" },
-    { icon: faInstagram, url: "https://www.instagram.com/" },
-    { icon: faFacebook, url: "https://www.facebook.com/" },
+    { icon: faLinkedin, url: "https://www.linkedin.com/in/addisu-anley/" },
+    { icon: faGithub, url: "https://github.com/addisuanley2010/" },
+    { icon: faTelegram, url: "https://t.me/Addis_Anley" },
+    { icon: faInstagram, url: "https://www.instagram.com/adda_2025/" },
+    { icon: faFacebook, url: "https://web.facebook.com/addisu.anley.739" },
     { icon: faTwitter, url: "https://twitter.com/" },
   ];
 
@@ -32,7 +32,7 @@ const Home = () => {
           CGPA: 3.82
         </p>
         <a
-          href="#"
+          href="https://drive.google.com/file/d/1tuUtx3eyTulrXJ7mn5svo0kY95Y6I_bn/view?usp=sharing"
           download
           className="block mt-4 text-blue-600 hover:underline"
         >
